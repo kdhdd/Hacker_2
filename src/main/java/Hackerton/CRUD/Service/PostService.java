@@ -1,17 +1,11 @@
 package Hackerton.CRUD.Service;
-import Hackerton.CRUD.domain.Group;
-import Hackerton.CRUD.domain.Like;
-import Hackerton.CRUD.domain.Post;
-import Hackerton.CRUD.domain.Font;
-import Hackerton.CRUD.domain.Background;
+
+import Hackerton.CRUD.Repository.*;
+import Hackerton.CRUD.domain.*;
 import Hackerton.CRUD.dto.PostDto;
-import Hackerton.CRUD.Repository.PostRepository;
-import Hackerton.CRUD.Repository.FontRepository;
-import Hackerton.CRUD.Repository.BackgroundRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +18,9 @@ public class PostService {
     private final PostRepository postRepository;
     private final FontRepository fontRepository;
     private final BackgroundRepository backgroundRepository;
+    private final GroupRepository groupRepository;
+    private final MemberRepository memberRepository;
+    private final EmotionRepository emotionRepository;
 
 
 
@@ -35,14 +32,17 @@ public class PostService {
         return existingPost.isEmpty();
     }
 
+    //모든 글 조회 기능
     public List<PostDto> getAllPosts() {
         return postRepository.findAll().stream().map(PostDto::from).collect(Collectors.toList());
     }
 
-    public Optional<Post> getPostById(Long id) {
-        return postRepository.findById(id);
+    //글 조회 기능
+    public PostDto getPostById(Long id) {
+        return postRepository.findById(id).map(PostDto::from).orElse(null);
     }
 
+    //글 작성 기능
     public PostDto createPost(PostDto postDto) {
         if (!canUserPostToday(postDto.getMemberId(), postDto.getGroupId())) {
             throw new IllegalStateException("하루에 한번만 글 작성이 가능합니다!");
@@ -53,17 +53,40 @@ public class PostService {
         return PostDto.from(post);
     }
 
+    //글 삭제 기능
     public void deletePost(Long id) {
         postRepository.deleteById(id);
     }
 
+    //글 수정 기능
     public PostDto updatePost(Long id, PostDto postDto) {
         Optional<Post> existingPost = postRepository.findById(id);
         if (existingPost.isPresent()) {
             Post post = existingPost.get();
-            post.setMember(postDto.getMemberId());
-            post.setGroup(postDto.getGroupId());
-            post.setEmotion(postDto.getEmotionId());
+
+            // Member 객체를 조회하여 설정
+            Member member = memberRepository.findById(postDto.getMemberId()).orElse(null);
+            if (member != null) {
+                post.setMember(member);
+            } else {
+                throw new IllegalStateException("해당 ID의 회원을 찾을 수 없습니다.");
+            }
+
+            // Group 객체를 조회하여 설정
+            Group group = groupRepository.findById(postDto.getGroupId()).orElse(null);
+            if (group != null) {
+                post.setGroup(group);
+            } else {
+                throw new IllegalStateException("해당 ID의 그룹을 찾을 수 없습니다.");
+            }
+            // Emotion 객체를 조회하여 설정
+            Emotion emotion = emotionRepository.findById(postDto.getEmotionId()).orElse(null);
+            if (emotion != null) {
+                post.setEmotion(emotion);
+            } else {
+                throw new IllegalStateException("해당 ID의 감정을 찾을 수 없습니다.");
+            }
+
             post.setContent(postDto.getContent());
             post.setCreatedAt(postDto.getCreatedAt());
             post.setTitle(postDto.getTitle());
@@ -106,12 +129,34 @@ public class PostService {
     }
 
 
-    private Post toEntity(PostDto dto) {
+    public Post toEntity(PostDto dto) {
         Post post = new Post();
         post.setId(dto.getId());
-        post.setMember(dto.getMemberId());
-        post.setGroup(dto.getGroupId());
-        post.setEmotion(dto.getEmotionId());
+
+        // Member 객체를 조회하여 설정
+        Member member = memberRepository.findById(dto.getMemberId()).orElse(null);
+        if (member != null) {
+            post.setMember(member);
+        } else {
+            throw new IllegalStateException("해당 ID의 회원을 찾을 수 없습니다.");
+        }
+
+        // Group 객체를 조회하여 설정
+        Group group = groupRepository.findById(dto.getGroupId()).orElse(null);
+        if (group != null) {
+            post.setGroup(group);
+        } else {
+            throw new IllegalStateException("해당 ID의 그룹을 찾을 수 없습니다.");
+        }
+
+        // Emotion 객체를 조회하여 설정
+        Emotion emotion = emotionRepository.findById(dto.getEmotionId()).orElse(null);
+        if (emotion != null) {
+            post.setEmotion(emotion);
+        } else {
+            throw new IllegalStateException("해당 ID의 감정을 찾을 수 없습니다.");
+        }
+
         post.setContent(dto.getContent());
         post.setCreatedAt(dto.getCreatedAt());
         post.setTitle(dto.getTitle());

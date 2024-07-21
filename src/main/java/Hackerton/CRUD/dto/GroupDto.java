@@ -8,12 +8,13 @@ import lombok.Setter;
 @Setter
 public class GroupDto {
     private Long id;
-    private String Topic;
+    private String topic; // 필드명의 첫 글자를 소문자로 변경
+
 
     public static GroupDto from(Group group) {
         GroupDto groupDto = new GroupDto();
         groupDto.setId(group.getId());
-        groupDto.setTopic(groupDto.getTopic());
+        groupDto.setTopic(group.getTopic());
         return groupDto;
     }
 }
