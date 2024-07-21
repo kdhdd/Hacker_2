@@ -1,23 +1,24 @@
 package Hackerton.CRUD.domain;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 
 @Entity
 @Getter
 @Setter
-public class Question {
+public class QuestionHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="question_id")
+    @Column(name="history_id")
     private Long id;
 
-    private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime selectedAt;
+    @ManyToOne
+    @JoinColumn(name="question_id")
+    private Question question;
+
+    private LocalDate date;
 }

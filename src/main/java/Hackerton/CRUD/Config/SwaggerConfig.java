@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
-        info = @Info(title = "SWAGGER 실습", description = "6주차 스웨거 실습입니다", version = "v1"),
+        info = @Info(title = "SWAGGER", description = "멋사 헤커톤 2팀 잠집자 BE 스웨거", version = "v1"),
         servers = @Server(url = "http://localhost:8080", description = "서버 URL")
 
 )

@@ -1,23 +1,23 @@
 package Hackerton.CRUD.domain;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import lombok.Setter;
-
 
 @Entity
 @Getter
 @Setter
-public class Question {
+public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="question_id")
+    @Column(name = "like_id")
     private Long id;
 
-    private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime selectedAt;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 }

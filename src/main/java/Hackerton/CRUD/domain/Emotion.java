@@ -1,23 +1,23 @@
 package Hackerton.CRUD.domain;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class Question {
+public class Emotion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="question_id")
+    @Column(name="emotion_id")
     private Long id;
 
-    private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime selectedAt;
+    private String emotionName;
+    private String emoji;
+
+    @OneToMany(mappedBy = "emotion")
+    private List<Post> posts;
 }
