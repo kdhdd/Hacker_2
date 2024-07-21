@@ -15,7 +15,7 @@ import java.util.List;
 public class Group {
     @Id // 기본키 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="group_id")
+    @Column(name = "group_id")
     private Long id;
 
     // 그룹에 배정된 주제
