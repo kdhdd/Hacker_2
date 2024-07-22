@@ -3,6 +3,7 @@ package Hackerton.CRUD.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,12 +19,14 @@ public class Member {
     @Column(name="member_id")
     private Long id;
 
-    private String User_Psw;
-    private String User_Name;
-    private String User_EMail;
-    private String User_Nickname;
-    private Long User_Coins;
+    private String Member_Name;
+    private String Member_EMail;
+    private String Member_Password;
+    private Long Member_Coins;
     private String Badges;
+
+    @ColumnDefault("true")
+    private boolean Today = true;
 
     @CreationTimestamp // 현재 시간으로 타임스탬프 생성
     private LocalDateTime registerDate;
@@ -32,3 +35,6 @@ public class Member {
     private List<Comment> comments = new ArrayList<>();
 
 }
+
+//    @ColumnDefault("true")
+//    private boolean perform = true; // 수행 여부
