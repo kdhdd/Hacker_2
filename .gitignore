@@ -39,3 +39,4 @@ out/
 ### Custom ###
 # Ignore application.properties file
 src/main/resources/application.properties
+src/main/resources/questions.txt
