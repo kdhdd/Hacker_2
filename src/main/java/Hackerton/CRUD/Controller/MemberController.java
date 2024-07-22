@@ -26,12 +26,11 @@ public class MemberController {
     @PostMapping
     public ResponseEntity<MemberDto> registerMember(@RequestBody MemberDto memberDto) {
         Member member = new Member();
-        member.setUser_Name(memberDto.getUser_Name());
-        member.setUser_Psw(memberDto.getUser_Psw());
-        member.setUser_EMail(memberDto.getUser_EMail());
-        member.setUser_Nickname(memberDto.getUser_Nickname());
-        member.setUser_Coins(memberDto.getUser_Coins());
-        member.setBadges(null);
+        member.setMember_Name(memberDto.getMember_Name());
+        member.setMember_EMail(memberDto.getMember_EMail());
+        member.setMember_Password(memberDto.getMember_Password());
+        member.setMember_Coins(memberDto.getMember_Coins());
+        member.setBadges(memberDto.getBadges());
         Member registeredMember = memberService.registerMember(member);
         return ResponseEntity.ok(MemberDto.from(registeredMember));
     }

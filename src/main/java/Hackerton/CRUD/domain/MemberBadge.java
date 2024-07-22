@@ -6,24 +6,24 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class Group {
-    @Id // 기본키 지정
+public class MemberBadge {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="group_id")
+    @Column(name="memberBadge_id")
     private Long id;
 
-    // 그룹에 배정된 주제
-    private String Topic;
-
     @CreationTimestamp
-    private LocalDateTime Created_at;
+    private LocalDateTime Award_at;
 
-    /*@OneToMany(mappedBy = "post")
-    private List<Post> posts = new ArrayList<>();*/
+    @ManyToOne
+    @JoinColumn(name="member_id")
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name="badge_id")
+    private Badge badge;
 }
