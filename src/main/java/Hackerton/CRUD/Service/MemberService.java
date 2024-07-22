@@ -33,20 +33,19 @@ public class MemberService {
         if (memberOptional.isPresent()) {
             Member member = memberOptional.get();
             // 이름 수정
-            if (memberDto.getUser_Name() != null) {
-                member.setUser_Name(memberDto.getUser_Name());
-            }
-            // 비밀번호 수정
-            if (memberDto.getUser_Psw() != null) {
-                member.setUser_Psw(memberDto.getUser_Psw());
+            if (memberDto.getMember_Name() != null) {
+                member.setMember_Name(memberDto.getMember_Name());
             }
             // 이메일 수정
-            if (memberDto.getUser_EMail() != null) {
-                member.setUser_EMail(memberDto.getUser_EMail());
+            if (memberDto.getMember_EMail() != null) {
+                member.setMember_EMail(memberDto.getMember_EMail());
             }
-            // 닉네임 수정
-            if (memberDto.getUser_Nickname() != null) {
-                member.setUser_Nickname(memberDto.getUser_Nickname());
+            // 비밀번호 수정
+            if (memberDto.getMember_Password() != null) {
+                member.setMember_Password(memberDto.getMember_Password());
+            }
+            if (memberDto.isToday() != member.isToday()) {
+                member.setToday(memberDto.isToday());
             }
             return memberRepository.save(member);
         } else {
