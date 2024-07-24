@@ -18,17 +18,17 @@ public class PostService {
     private final PostRepository postRepository;
     private final FontRepository fontRepository;
     private final BackgroundRepository backgroundRepository;
-    private final GroupRepository groupRepository;
+    private final TeamRepository teamRepository;
     private final MemberRepository memberRepository;
     private final EmotionRepository emotionRepository;
 
 
 
     // 사용자 하루에 한 번 글 작성 제한
-    public boolean canUserPostToday(Long memberId, Long groupId) {
+    public boolean canUserPostToday(Long memberId, Long teamId) {
         LocalDateTime startOfDay = LocalDateTime.now().toLocalDate().atStartOfDay();
         LocalDateTime endOfDay = startOfDay.plusDays(1);
-        Optional<Post> existingPost = postRepository.findByMemberIdAndGroupIdAndCreatedAtBetween(memberId, groupId, startOfDay, endOfDay);
+        Optional<Post> existingPost = postRepository.findByMemberIdAndTeamIdAndCreatedAtBetween(memberId, teamId, startOfDay, endOfDay);
         return existingPost.isEmpty();
     }
 
@@ -44,7 +44,7 @@ public class PostService {
 
     //글 작성 기능
     public PostDto createPost(PostDto postDto) {
-        if (!canUserPostToday(postDto.getMemberId(), postDto.getGroupId())) {
+        if (!canUserPostToday(postDto.getMemberId(), postDto.getTeamId())) {
             throw new IllegalStateException("하루에 한번만 글 작성이 가능합니다!");
         }
         Post post = toEntity(postDto);
@@ -72,10 +72,10 @@ public class PostService {
                 throw new IllegalStateException("해당 ID의 회원을 찾을 수 없습니다.");
             }
 
-            // Group 객체를 조회하여 설정
-            Group group = groupRepository.findById(postDto.getGroupId()).orElse(null);
-            if (group != null) {
-                post.setGroup(group);
+            // Team 객체를 조회하여 설정
+            Team team = teamRepository.findById(postDto.getTeamId()).orElse(null);
+            if (team != null) {
+                post.setTeam(team);
             } else {
                 throw new IllegalStateException("해당 ID의 그룹을 찾을 수 없습니다.");
             }
@@ -115,16 +115,16 @@ public class PostService {
         PostDto dto = new PostDto();
         dto.setId(post.getId());
         dto.setMemberId(post.getMember() != null ? post.getMember().getId() : null);
-        dto.setGroupId(post.getGroup() != null ? post.getGroup().getId() : null);
+        dto.setTeamId(post.getTeam() != null ? post.getTeam().getId() : null);
         dto.setEmotionId(post.getEmotion() != null ? post.getEmotion().getId() : null);
         dto.setFontIds(post.getFonts() != null ? post.getFonts().stream().map(Font::getId).collect(Collectors.toList()) : null);
         dto.setBackgroundIds(post.getBackgrounds() != null ? post.getBackgrounds().stream().map(Background::getId).collect(Collectors.toList()) : null);
         dto.setContent(post.getContent());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setTitle(post.getTitle());
-        dto.setLikeCount(post.getLikeCount());
+        dto.setHeartCount(post.getHeartCount());
         dto.setTempSave(post.getTempSave());
-        dto.setLikeIds(post.getLikes() != null ? post.getLikes().stream().map(Like::getId).collect(Collectors.toList()) : null);
+        dto.setHeartIds(post.getHearts() != null ? post.getHearts().stream().map(Heart::getId).collect(Collectors.toList()) : null);
         return dto;
     }
 
@@ -141,10 +141,10 @@ public class PostService {
             throw new IllegalStateException("해당 ID의 회원을 찾을 수 없습니다.");
         }
 
-        // Group 객체를 조회하여 설정
-        Group group = groupRepository.findById(dto.getGroupId()).orElse(null);
-        if (group != null) {
-            post.setGroup(group);
+        // Team 객체를 조회하여 설정
+        Team team = teamRepository.findById(dto.getTeamId()).orElse(null);
+        if (team != null) {
+            post.setTeam(team);
         } else {
             throw new IllegalStateException("해당 ID의 그룹을 찾을 수 없습니다.");
         }

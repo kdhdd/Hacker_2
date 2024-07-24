@@ -21,8 +21,8 @@ public class Post {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name="group_id")
-    private Group group;
+    @JoinColumn(name="team_id")
+    private Team team;
 
     @ManyToOne
     @JoinColumn(name = "emotionId")
@@ -31,11 +31,11 @@ public class Post {
     private String content;
     private LocalDateTime createdAt;
     private String title;
-    private Integer likeCount;
+    private Integer HeartCount;
     private String tempSave;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Like> likes;
+    private List<Heart> hearts;
 
     //Post Table을 참조하는 컬럼명을 post_id
     //Font Table을 참조하는 컬럼명을 font_id로 지칭
@@ -59,8 +59,8 @@ public class Post {
 
     // 좋아요 표시 갯수 파악
     // 좋아요 리스트를 보고 싶으면 자동 생성된 getter을 사용하면 됨
-    public int getLikeCount() {
-        return likes != null ? likes.size() : 0;
+    public int getHeartCount() {
+        return hearts != null ? hearts.size() : 0;
     }
 
 

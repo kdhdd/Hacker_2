@@ -6,16 +6,15 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class Group {
+public class Team {
     @Id // 기본키 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "group_id")
+    @Column(name = "team_id")
     private Long id;
 
     // 그룹에 배정된 주제
@@ -24,6 +23,6 @@ public class Group {
     @CreationTimestamp
     private LocalDateTime Created_at;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "team")
     private List<Post> posts; // Post와 연관관계 설정
 }

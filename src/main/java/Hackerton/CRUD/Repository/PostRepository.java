@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    Optional<Post> findByMemberIdAndGroupIdAndCreatedAtBetween(Long memberId, Long groupId, LocalDateTime startOfDay, LocalDateTime endOfDay);
+    Optional<Post> findByMemberIdAndTeamIdAndCreatedAtBetween(Long memberId, Long teamId, LocalDateTime startOfDay, LocalDateTime endOfDay);
 }
+
+//findByMemberIdAndGroupIdAndCreatedAtBetween
 

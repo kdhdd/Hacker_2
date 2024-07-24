@@ -25,8 +25,8 @@ public class Member {
     private Long Member_Coins;
     private String Badges;
 
-    @ColumnDefault("true")
-    private boolean Today = true;
+    @ColumnDefault("false")
+    private boolean Today = false;
 
     @CreationTimestamp // 현재 시간으로 타임스탬프 생성
     private LocalDateTime registerDate;
@@ -35,6 +35,3 @@ public class Member {
     private List<Comment> comments = new ArrayList<>();
 
 }
-
-//    @ColumnDefault("true")
-//    private boolean perform = true; // 수행 여부
