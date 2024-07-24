@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/backgrounds")
+@RequestMapping("/api/backgrounds")
 public class BackgroundController {
 
     @Autowired

@@ -19,11 +19,11 @@ public class Group {
     private Long id;
 
     // 그룹에 배정된 주제
-    private String Topic;
+    private String topic; // 주제의 첫 글자를 소문자로 변경
 
     @CreationTimestamp
     private LocalDateTime Created_at;
 
-    /*@OneToMany(mappedBy = "post")
-    private List<Post> posts = new ArrayList<>();*/
+    @OneToMany(mappedBy = "group")
+    private List<Post> posts; // Post와 연관관계 설정
 }

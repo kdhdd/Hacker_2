@@ -1,5 +1,6 @@
 package Hackerton.CRUD.dto;
 
+
 import Hackerton.CRUD.domain.Font;
 import Hackerton.CRUD.domain.Background;
 import Hackerton.CRUD.domain.Like;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class PostDto {
     private Long id;
     private Long memberId;
-//    private Long groupId;
+    private Long groupId;
     private Long emotionId;
     private List<Long> fontIds;
     private List<Long> backgroundIds;
@@ -31,7 +32,7 @@ public class PostDto {
         PostDto dto = new PostDto();
         dto.setId(post.getId());
         dto.setMemberId(post.getMember() != null ? post.getMember().getId() : null);
-//        dto.setGroupId(post.getGroup() != null ? post.getGroup().getId() : null);
+        dto.setGroupId(post.getGroup() != null ? post.getGroup().getId() : null);
         dto.setEmotionId(post.getEmotion() != null ? post.getEmotion().getId() : null);
         dto.setFontIds(post.getFonts() != null ? post.getFonts().stream().map(Font::getId).collect(Collectors.toList()) : null);
         dto.setBackgroundIds(post.getBackgrounds() != null ? post.getBackgrounds().stream().map(Background::getId).collect(Collectors.toList()) : null);
