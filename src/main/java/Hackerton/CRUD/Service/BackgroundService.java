@@ -17,6 +17,7 @@ public class BackgroundService {
     public Background createBackground(BackgroundDto backgroundDto) {
         Background background = new Background();
         background.setBackgroundColor(backgroundDto.getBackgroundColor());
+        background.setBackgroundPointCost(backgroundDto.getBackgroundPointCost());
         return backgroundRepository.save(background);
     }
 
@@ -32,6 +33,7 @@ public class BackgroundService {
         Background background = getBackgroundById(id);
         if (background != null) {
             background.setBackgroundColor(backgroundDto.getBackgroundColor());
+            background.setBackgroundPointCost(backgroundDto.getBackgroundPointCost());
             return backgroundRepository.save(background);
         }
         return null;

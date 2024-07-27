@@ -19,8 +19,11 @@ public class Font {
     private String fontName;
     private Integer fontPointCost;
 
-    //다대다 조인
-    @ManyToMany(mappedBy = "fonts")
-    private List<Post> posts;
+    @OneToMany(mappedBy = "font")
+    private List<PostFont> postFonts;
+
+//    //다대다 조인
+//    @ManyToMany(mappedBy = "fonts")
+//    private List<Post> posts;
 }
 

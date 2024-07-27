@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class BackgroundDto {
     private String backgroundColor;
+    private Integer backgroundPointCost;
 }

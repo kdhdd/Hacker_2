@@ -21,6 +21,8 @@ public class PostService {
     private final TeamRepository teamRepository;
     private final MemberRepository memberRepository;
     private final EmotionRepository emotionRepository;
+    private final PostFontRepository postFontRepository;
+    private final PostBackgroundRepository postBackgroundRepository;
 
 
 
@@ -50,6 +52,8 @@ public class PostService {
         Post post = toEntity(postDto);
         post.setCreatedAt(LocalDateTime.now());
         post = postRepository.save(post);
+        savePostFonts(post, postDto.getFontIds());
+        savePostBackgrounds(post, postDto.getBackgroundIds());
         return PostDto.from(post);
     }
 
@@ -92,10 +96,12 @@ public class PostService {
             post.setTitle(postDto.getTitle());
             post.setTempSave(postDto.getTempSave());
 
-            List<Font> fonts = fontRepository.findAllById(postDto.getFontIds());
-            post.setFonts(fonts);
-            List<Background> backgrounds = backgroundRepository.findAllById(postDto.getBackgroundIds());
-            post.setBackgrounds(backgrounds);
+            postFontRepository.deleteByPost(post);
+            postBackgroundRepository.deleteByPost(post);
+
+            savePostFonts(post, postDto.getFontIds());
+            savePostBackgrounds(post, postDto.getBackgroundIds());
+
 
             post = postRepository.save(post);
             return PostDto.from(post);
@@ -117,8 +123,8 @@ public class PostService {
         dto.setMemberId(post.getMember() != null ? post.getMember().getId() : null);
         dto.setTeamId(post.getTeam() != null ? post.getTeam().getId() : null);
         dto.setEmotionId(post.getEmotion() != null ? post.getEmotion().getId() : null);
-        dto.setFontIds(post.getFonts() != null ? post.getFonts().stream().map(Font::getId).collect(Collectors.toList()) : null);
-        dto.setBackgroundIds(post.getBackgrounds() != null ? post.getBackgrounds().stream().map(Background::getId).collect(Collectors.toList()) : null);
+        dto.setFontIds(post.getPostFonts() != null ? post.getPostFonts().stream().map(postFont -> postFont.getFont().getId()).collect(Collectors.toList()) : null);
+        dto.setBackgroundIds(post.getPostBackgrounds() != null ? post.getPostBackgrounds().stream().map(postBackground -> postBackground.getBackground().getId()).collect(Collectors.toList()) : null);
         dto.setContent(post.getContent());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setTitle(post.getTitle());
@@ -161,12 +167,35 @@ public class PostService {
         post.setCreatedAt(dto.getCreatedAt());
         post.setTitle(dto.getTitle());
         post.setTempSave(dto.getTempSave());
-
-        List<Font> fonts = fontRepository.findAllById(dto.getFontIds());
-        post.setFonts(fonts);
-        List<Background> backgrounds = backgroundRepository.findAllById(dto.getBackgroundIds());
-        post.setBackgrounds(backgrounds);
-
         return post;
     }
+    private void savePostFonts(Post post, List<Long> fontIds) {
+        if (fontIds != null) {
+            for (Long fontId : fontIds) {
+                Font font = fontRepository.findById(fontId).orElse(null);
+                if (font != null) {
+                    PostFont postFont = new PostFont();
+                    postFont.setPost(post);
+                    postFont.setFont(font);
+                    postFontRepository.save(postFont);
+                }
+            }
+        }
+    }
+
+    private void savePostBackgrounds(Post post, List<Long> backgroundIds) {
+        if (backgroundIds != null) {
+            for (Long backgroundId : backgroundIds) {
+                Background background = backgroundRepository.findById(backgroundId).orElse(null);
+                if (background != null) {
+                    PostBackground postBackground = new PostBackground();
+                    postBackground.setPost(post);
+                    postBackground.setBackground(background);
+                    postBackgroundRepository.save(postBackground);
+                }
+            }
+        }
+    }
+
+
 }

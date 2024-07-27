@@ -37,25 +37,31 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Heart> hearts;
 
-    //Post Table을 참조하는 컬럼명을 post_id
-    //Font Table을 참조하는 컬럼명을 font_id로 지칭
-    @ManyToMany
-    @JoinTable(
-            name = "post_font",
-            joinColumns = @JoinColumn(name = "post_id"),
-            inverseJoinColumns = @JoinColumn(name = "font_id")
-    )
-    private List<Font> fonts;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<PostFont> postFonts;
 
-    //Post Table을 참조하는 컬럼명을 post_id
-    //background Table을 참조하는 컬럼명을 background_id로 지칭
-    @ManyToMany
-    @JoinTable(
-            name = "post_background",
-            joinColumns = @JoinColumn(name = "post_id"),
-            inverseJoinColumns = @JoinColumn(name = "background_id")
-    )
-    private List<Background> backgrounds;
+//    //Post Table을 참조하는 컬럼명을 post_id
+//    //Font Table을 참조하는 컬럼명을 font_id로 지칭
+//    @ManyToMany
+//    @JoinTable(
+//            name = "post_font",
+//            joinColumns = @JoinColumn(name = "post_id"),
+//            inverseJoinColumns = @JoinColumn(name = "font_id")
+//    )
+//    private List<Font> fonts;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<PostBackground> postBackgrounds;
+
+//    //Post Table을 참조하는 컬럼명을 post_id
+//    //background Table을 참조하는 컬럼명을 background_id로 지칭
+//    @ManyToMany
+//    @JoinTable(
+//            name = "post_background",
+//            joinColumns = @JoinColumn(name = "post_id"),
+//            inverseJoinColumns = @JoinColumn(name = "background_id")
+//    )
+//    private List<Background> backgrounds;
 
     // 좋아요 표시 갯수 파악
     // 좋아요 리스트를 보고 싶으면 자동 생성된 getter을 사용하면 됨

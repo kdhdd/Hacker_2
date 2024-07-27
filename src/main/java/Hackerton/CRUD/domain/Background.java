@@ -19,12 +19,18 @@ public class Background {
     private Long id;
 
     private String backgroundColor;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private Integer backgroundPointCost;
+//    private LocalDateTime createdAt;
+//    private LocalDateTime updatedAt;
 
-    //다대다 조인
-    @ManyToMany(mappedBy = "backgrounds")
-    private List<Post> posts;
+    @OneToMany(mappedBy = "background")
+    private List<PostBackground> postBackgrounds;
+
+//    //다대다 조인
+//    @ManyToMany(mappedBy = "backgrounds")
+//    private List<Post> posts;
+
+
 
 
 }
