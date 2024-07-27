@@ -21,9 +21,9 @@ public class MemberDto {
     public static MemberDto from(Member member) {
         MemberDto memberDto = new MemberDto();
         memberDto.setId(member.getId());
-        memberDto.setMember_Name(member.getMember_Name());
-        memberDto.setMember_EMail(member.getMember_EMail());
-        memberDto.setMember_Password(member.getMember_Password());
+        memberDto.setMember_Name(member.getNickname());
+        memberDto.setMember_EMail(member.getLoginId());
+        memberDto.setMember_Password(member.getPassword());
         memberDto.setMember_Coins(member.getMember_Coins());
         memberDto.setBadges(member.getBadges());
 
