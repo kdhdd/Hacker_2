@@ -117,6 +117,48 @@ public class PostService {
         postRepository.save(post);
     }
 
+    // 같은 주제를 선택한 사람들끼리 묶어서 보여주는 기능
+    public List<PostDto> getPostsByTeamId(Long teamId) {
+        return postRepository.findByTeamId(teamId).stream()
+                .map(PostDto::from)
+                .collect(Collectors.toList());
+    }
+
+    // 인기순으로 정렬하여 보여주는 기능
+    public List<PostDto> getPostsByTeamIdOrderByHeartCountDesc(Long teamId) {
+        return postRepository.findByTeamIdOrderByHeartCountDesc(teamId).stream()
+                .map(PostDto::from)
+                .collect(Collectors.toList());
+    }
+
+    // 최신순으로 정렬하여 보여주는 기능
+    public List<PostDto> getPostsByTeamIdOrderByCreatedAtDesc(Long teamId) {
+        return postRepository.findByTeamIdOrderByCreatedAtDesc(teamId).stream()
+                .map(PostDto::from)
+                .collect(Collectors.toList());
+    }
+
+    // 특정 감정별로 글을 분류하여 보여주는 기능
+    public List<PostDto> getPostsByTeamIdAndEmotionId(Long teamId, Long emotionId) {
+        return postRepository.findByTeamIdAndEmotionId(teamId, emotionId).stream()
+                .map(PostDto::from)
+                .collect(Collectors.toList());
+    }
+
+    // 특정 감정별로 최신순 정렬하여 보여주는 기능
+    public List<PostDto> getPostsByTeamIdAndEmotionIdOrderByCreatedAtDesc(Long teamId, Long emotionId) {
+        return postRepository.findByTeamIdAndEmotionIdOrderByCreatedAtDesc(teamId, emotionId).stream()
+                .map(PostDto::from)
+                .collect(Collectors.toList());
+    }
+
+    // 특정 감정별로 인기순 정렬하여 보여주는 기능
+    public List<PostDto> getPostsByTeamIdAndEmotionIdOrderByHeartCountDesc(Long teamId, Long emotionId) {
+        return postRepository.findByTeamIdAndEmotionIdOrderByHeartCountDesc(teamId, emotionId).stream()
+                .map(PostDto::from)
+                .collect(Collectors.toList());
+    }
+
     private PostDto toDto(Post post) {
         PostDto dto = new PostDto();
         dto.setId(post.getId());
@@ -152,7 +194,7 @@ public class PostService {
         if (team != null) {
             post.setTeam(team);
         } else {
-            throw new IllegalStateException("해당 ID의 그룹을 찾을 수 없습니다.");
+            throw new IllegalStateException("해당 ID의 팀을 찾을 수 없습니다.");
         }
 
         // Emotion 객체를 조회하여 설정
