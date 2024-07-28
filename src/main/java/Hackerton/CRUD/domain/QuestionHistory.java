@@ -13,11 +13,11 @@ import java.time.LocalDate;
 public class QuestionHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="history_id")
+    @Column(name = "history_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="question_id")
+    @JoinColumn(name = "question_id")
     private Question question;
 
     private LocalDate date;

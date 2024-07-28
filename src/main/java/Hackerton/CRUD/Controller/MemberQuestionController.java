@@ -12,12 +12,8 @@ import java.util.List;
 @RequestMapping("/api/member-questions")
 public class MemberQuestionController {
 
-    private final MemberQuestionService memberQuestionService;
-
     @Autowired
-    public MemberQuestionController(MemberQuestionService memberQuestionService) {
-        this.memberQuestionService = memberQuestionService;
-    }
+    private MemberQuestionService memberQuestionService;
 
     @PostMapping
     public MemberQuestion createMemberQuestion(@RequestBody MemberQuestionDto memberQuestionDto) {
