@@ -5,6 +5,7 @@ import Hackerton.CRUD.domain.*;
 import Hackerton.CRUD.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +24,7 @@ public class PostService {
     private final EmotionRepository emotionRepository;
     private final PostFontRepository postFontRepository;
     private final PostBackgroundRepository postBackgroundRepository;
+    private final CoinService coinService;
 
 
 
@@ -237,6 +239,19 @@ public class PostService {
                 }
             }
         }
+    }
+    // 코인 사용하여 다른 주제의 글 조회 기능
+    @Transactional
+    public PostDto viewPostWithCoin(Long postId, Long memberId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found"));
+        Long teamId = post.getTeam().getId();
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+        if (!member.getTeam().getId().equals(teamId)) {
+            coinService.subtractCoins(memberId, 5, "다른 주제의 글 조회");
+        }
+
+        return PostDto.from(post);
     }
 
 

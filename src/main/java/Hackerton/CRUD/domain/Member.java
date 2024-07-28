@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity // 테이블과 엔티티 매핑
+@Entity
 @Builder
 @Getter
 @Setter
@@ -27,7 +27,11 @@ public class Member {
 
     private UserRole role;
 
-    private Long Member_Coins;
+    // 이름을 coins로 변경하고 기본값 설정
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private Long coins;
+
     private String Badges;
 
     @Builder.Default
@@ -39,5 +43,10 @@ public class Member {
     @Builder.Default
     @OneToMany(mappedBy="member")
     private List<Comment> comments = new ArrayList<>();
+
+    //Team 관계 추가
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
 }

@@ -18,11 +18,14 @@ public class Team {
     private Long id;
 
     // 그룹에 배정된 주제
-    private String topic; // 주제의 첫 글자를 소문자로 변경
+    private String topic;
 
     @CreationTimestamp
     private LocalDateTime Created_at;
 
     @OneToMany(mappedBy = "team")
     private List<Post> posts; // Post와 연관관계 설정
+
+    @OneToMany(mappedBy = "team")
+    private List<Member> members; // Member와 연관관계 설정
 }
