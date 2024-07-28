@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class CoinService {
@@ -20,11 +19,11 @@ public class CoinService {
     private final MemberRepository memberRepository;
     private final CoinTransactionRepository coinTransactionRepository;
 
-
     @Autowired
-    public CoinService(CoinRepository coinRepository, MemberRepository memberRepository) {
+    public CoinService(CoinRepository coinRepository, MemberRepository memberRepository, CoinTransactionRepository coinTransactionRepository) {
         this.coinRepository = coinRepository;
         this.memberRepository = memberRepository;
+        this.coinTransactionRepository = coinTransactionRepository;
     }
 
     // 코인 추가

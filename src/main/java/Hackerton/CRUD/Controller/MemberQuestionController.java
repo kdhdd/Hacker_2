@@ -12,8 +12,12 @@ import java.util.List;
 @RequestMapping("/api/member-questions")
 public class MemberQuestionController {
 
+    private final MemberQuestionService memberQuestionService;
+
     @Autowired
-    private MemberQuestionService memberQuestionService;
+    public MemberQuestionController(MemberQuestionService memberQuestionService) {
+        this.memberQuestionService = memberQuestionService;
+    }
 
     @PostMapping
     public MemberQuestion createMemberQuestion(@RequestBody MemberQuestionDto memberQuestionDto) {
@@ -33,10 +37,5 @@ public class MemberQuestionController {
     @PutMapping("/{id}")
     public MemberQuestion updateMemberQuestion(@PathVariable Long id, @RequestBody MemberQuestionDto memberQuestionDto) {
         return memberQuestionService.updateMemberQuestion(id, memberQuestionDto);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteMemberQuestion(@PathVariable Long id) {
-        memberQuestionService.deleteMemberQuestion(id);
     }
 }

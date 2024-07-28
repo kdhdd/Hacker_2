@@ -11,5 +11,4 @@ public class QuestionDto {
     private Long id;
     private String content;
     private LocalDateTime createdAt;
-    private LocalDateTime selectedAt;
 }

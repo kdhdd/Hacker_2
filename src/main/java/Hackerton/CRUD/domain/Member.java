@@ -44,9 +44,8 @@ public class Member {
     @OneToMany(mappedBy="member")
     private List<Comment> comments = new ArrayList<>();
 
-    //Team 관계 추가
-    @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
+    // MemberQuestion 관계 추가
+    @OneToMany(mappedBy = "member")
+    private List<MemberQuestion> memberQuestions = new ArrayList<>();
 
 }

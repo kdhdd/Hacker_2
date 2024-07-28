@@ -22,8 +22,9 @@ public class Post {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name="team_id")
-    private Team team;
+    @JoinColumn(name="question_id")
+    private Question question;
+
 
     @ManyToOne
     @JoinColumn(name = "emotionId")
@@ -65,15 +66,17 @@ public class Post {
 //    private List<Background> backgrounds;
 
     // 좋아요 표시 갯수 파악
-    //null 일 경우 0 반환, null이 아닐 경우 리스트 크기 반환
+    // null 일 경우 0 반환, null이 아닐 경우 리스트 크기 반환
     public int getHeartCount() {
         return hearts != null ? hearts.size() : 0;
     }
-    //하트 리스트
-    //해당 게시물에 누가 하트를 눌렀는지 확인 가능
+    /*
+    해당 부분 구현해야 할지 몰라서 일단 주석처리 해둠..
+    // 하트 리스트
+    // 해당 게시물에 누가 하트를 눌렀는지 확인 가능
     public List<Heart> getHearts() {
         return hearts;
-    }
+    }*/
 
 
 }

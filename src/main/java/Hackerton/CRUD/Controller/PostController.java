@@ -40,39 +40,39 @@ public class PostController {
     }
 
     // 같은 주제를 선택한 사람들끼리 묶어서 보여주는 엔드포인트
-    @GetMapping("/team/{teamId}")
-    public ResponseEntity<List<PostDto>> getPostsByTeamId(@PathVariable Long teamId) {
-        return ResponseEntity.ok(postService.getPostsByTeamId(teamId));
+    @GetMapping("/question/{questionId}")
+    public ResponseEntity<List<PostDto>> getPostsByQuestionId(@PathVariable Long questionId) {
+        return ResponseEntity.ok(postService.getPostsByQuestionId(questionId));
     }
 
     // 인기순으로 정렬하여 보여주는 엔드포인트
-    @GetMapping("/team/{teamId}/popular")
-    public ResponseEntity<List<PostDto>> getPostsByTeamIdOrderByHeartCountDesc(@PathVariable Long teamId) {
-        return ResponseEntity.ok(postService.getPostsByTeamIdOrderByHeartCountDesc(teamId));
+    @GetMapping("/question/{questionId}/popular")
+    public ResponseEntity<List<PostDto>> getPostsByQuestionIdOrderByHeartCountDesc(@PathVariable Long questionId) {
+        return ResponseEntity.ok(postService.getPostsByQuestionIdOrderByHeartCountDesc(questionId));
     }
 
     // 최신순으로 정렬하여 보여주는 엔드포인트
-    @GetMapping("/team/{teamId}/recent")
-    public ResponseEntity<List<PostDto>> getPostsByTeamIdOrderByCreatedAtDesc(@PathVariable Long teamId) {
-        return ResponseEntity.ok(postService.getPostsByTeamIdOrderByCreatedAtDesc(teamId));
+    @GetMapping("/question/{questionId}/recent")
+    public ResponseEntity<List<PostDto>> getPostsByQuestionIdOrderByCreatedAtDesc(@PathVariable Long questionId) {
+        return ResponseEntity.ok(postService.getPostsByQuestionIdOrderByCreatedAtDesc(questionId));
     }
 
     // 특정 감정별로 글을 분류하여 보여주는 엔드포인트
-    @GetMapping("/team/{teamId}/emotion/{emotionId}")
-    public ResponseEntity<List<PostDto>> getPostsByTeamIdAndEmotionId(@PathVariable Long teamId, @PathVariable Long emotionId) {
-        return ResponseEntity.ok(postService.getPostsByTeamIdAndEmotionId(teamId, emotionId));
+    @GetMapping("/question/{questionId}/emotion/{emotionId}")
+    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionId(@PathVariable Long questionId, @PathVariable Long emotionId) {
+        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionId(questionId, emotionId));
     }
 
     // 특정 감정별로 최신순으로 정렬하여 보여주는 엔드포인트
-    @GetMapping("/team/{teamId}/emotion/{emotionId}/recent")
-    public ResponseEntity<List<PostDto>> getPostsByTeamIdAndEmotionIdOrderByCreatedAtDesc(@PathVariable Long teamId, @PathVariable Long emotionId) {
-        return ResponseEntity.ok(postService.getPostsByTeamIdAndEmotionIdOrderByCreatedAtDesc(teamId, emotionId));
+    @GetMapping("/question/{questionId}/emotion/{emotionId}/recent")
+    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionIdOrderByCreatedAtDesc(@PathVariable Long questionId, @PathVariable Long emotionId) {
+        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionIdOrderByCreatedAtDesc(questionId, emotionId));
     }
 
     // 특정 감정별로 인기순으로 정렬하여 보여주는 엔드포인트
-    @GetMapping("/team/{teamId}/emotion/{emotionId}/popular")
-    public ResponseEntity<List<PostDto>> getPostsByTeamIdAndEmotionIdOrderByHeartCountDesc(@PathVariable Long teamId, @PathVariable Long emotionId) {
-        return ResponseEntity.ok(postService.getPostsByTeamIdAndEmotionIdOrderByHeartCountDesc(teamId, emotionId));
+    @GetMapping("/question/{questionId}/emotion/{emotionId}/popular")
+    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionIdOrderByHeartCountDesc(@PathVariable Long questionId, @PathVariable Long emotionId) {
+        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionIdOrderByHeartCountDesc(questionId, emotionId));
     }
 
     // 글 수정 기능
@@ -87,6 +87,13 @@ public class PostController {
     public ResponseEntity<Void> saveTempPost(@RequestBody PostDto postDto) {
         postService.saveTempPost(postDto);
         return ResponseEntity.noContent().build();
+    }
+
+    // 다른 주제의 글을 코인으로 조회하는 기능
+    @GetMapping("/{postId}/view")
+    public ResponseEntity<PostDto> viewPostWithCoin(@PathVariable Long postId, @RequestParam Long memberId) {
+        PostDto postDto = postService.viewPostWithCoin(postId, memberId);
+        return postDto != null ? ResponseEntity.ok(postDto) : ResponseEntity.notFound().build();
     }
 }
 
