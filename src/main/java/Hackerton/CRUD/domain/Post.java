@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,14 +32,14 @@ public class Post {
     private String content;
     private LocalDateTime createdAt;
     private String title;
-    private Integer HeartCount;
+    //private Integer HeartCount;
     private String tempSave;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Heart> hearts;
+    private List<Heart> hearts = new ArrayList<>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostFont> postFonts;
+    private List<PostFont> postFonts = new ArrayList<>();
 
 //    //Post Table을 참조하는 컬럼명을 post_id
 //    //Font Table을 참조하는 컬럼명을 font_id로 지칭
@@ -51,7 +52,7 @@ public class Post {
 //    private List<Font> fonts;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostBackground> postBackgrounds;
+    private List<PostBackground> postBackgrounds = new ArrayList<>();
 
 //    //Post Table을 참조하는 컬럼명을 post_id
 //    //background Table을 참조하는 컬럼명을 background_id로 지칭
@@ -64,9 +65,14 @@ public class Post {
 //    private List<Background> backgrounds;
 
     // 좋아요 표시 갯수 파악
-    // 좋아요 리스트를 보고 싶으면 자동 생성된 getter을 사용하면 됨
+    //null 일 경우 0 반환, null이 아닐 경우 리스트 크기 반환
     public int getHeartCount() {
         return hearts != null ? hearts.size() : 0;
+    }
+    //하트 리스트
+    //해당 게시물에 누가 하트를 눌렀는지 확인 가능
+    public List<Heart> getHearts() {
+        return hearts;
     }
 
 
