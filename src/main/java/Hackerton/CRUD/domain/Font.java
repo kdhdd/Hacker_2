@@ -22,8 +22,17 @@ public class Font {
     @OneToMany(mappedBy = "font")
     private List<PostFont> postFonts;
 
-//    //다대다 조인
-//    @ManyToMany(mappedBy = "fonts")
-//    private List<Post> posts;
+    @OneToMany(mappedBy = "font")
+    private List<MemberFont> memberFonts;
+
+    //데이터를 자동으로 초기화
+    public Font(String fontName, Integer fontPointCost) {
+        this.fontName = fontName;
+        this.fontPointCost = fontPointCost;
+    }
+
+    public Font() {
+    }
+
 }
 

@@ -3,16 +3,16 @@ package Hackerton.CRUD.Service;
 import Hackerton.CRUD.domain.Font;
 import Hackerton.CRUD.dto.FontDto;
 import Hackerton.CRUD.Repository.FontRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class FontService {
 
-    @Autowired
-    private FontRepository fontRepository;
+    private final FontRepository fontRepository;
 
     public Font createFont(FontDto fontDto) {
         Font font = new Font();

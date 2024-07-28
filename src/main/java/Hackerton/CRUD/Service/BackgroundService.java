@@ -3,16 +3,16 @@ package Hackerton.CRUD.Service;
 import Hackerton.CRUD.domain.Background;
 import Hackerton.CRUD.dto.BackgroundDto;
 import Hackerton.CRUD.Repository.BackgroundRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BackgroundService {
 
-    @Autowired
-    private BackgroundRepository backgroundRepository;
+    private final BackgroundRepository backgroundRepository;
 
     public Background createBackground(BackgroundDto backgroundDto) {
         Background background = new Background();

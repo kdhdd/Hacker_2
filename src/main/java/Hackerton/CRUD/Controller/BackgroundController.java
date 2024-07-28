@@ -3,17 +3,17 @@ package Hackerton.CRUD.Controller;
 import Hackerton.CRUD.domain.Background;
 import Hackerton.CRUD.dto.BackgroundDto;
 import Hackerton.CRUD.Service.BackgroundService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/backgrounds")
+@RequiredArgsConstructor
 public class BackgroundController {
 
-    @Autowired
-    private BackgroundService backgroundService;
+    private final BackgroundService backgroundService;
 
     @PostMapping
     public Background createBackground(@RequestBody BackgroundDto backgroundDto) {

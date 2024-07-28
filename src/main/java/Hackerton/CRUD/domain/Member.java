@@ -48,4 +48,28 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<MemberQuestion> memberQuestions = new ArrayList<>();
 
+    //Font 관계 추가
+    @OneToMany(mappedBy = "member")
+    private List<MemberFont> memberFonts = new ArrayList<>();
+
+
+    //Background 관계 추가
+    @OneToMany(mappedBy = "member")
+    private List<MemberBackground> memberBackgrounds = new ArrayList<>();
+
+
+    //Post 관계 추가
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
+
+    /*
+    도현님.. 여기 한번 수정 해야 할지도..
+    @OneToMany(mappedBy = "member")
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Heart> hearts = new ArrayList<>();*/
+
+
+
 }

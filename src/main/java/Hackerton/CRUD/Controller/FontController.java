@@ -2,17 +2,18 @@ package Hackerton.CRUD.Controller;
 import Hackerton.CRUD.domain.Font;
 import Hackerton.CRUD.dto.FontDto;
 import Hackerton.CRUD.Service.FontService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/fonts")
+@RequiredArgsConstructor
 public class FontController {
 
-    @Autowired
-    private FontService fontService;
+    private final FontService fontService;
 
     @PostMapping
     public Font createFont(@RequestBody FontDto fontDto) {
