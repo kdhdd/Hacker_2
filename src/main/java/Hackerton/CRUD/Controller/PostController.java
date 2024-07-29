@@ -56,23 +56,23 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostsByQuestionIdOrderByCreatedAtDesc(questionId));
     }
 
-    // 특정 감정별로 글을 분류하여 보여주는 엔드포인트
-    @GetMapping("/question/{questionId}/emotion/{emotionId}")
-    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionId(@PathVariable Long questionId, @PathVariable Long emotionId) {
-        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionId(questionId, emotionId));
-    }
-
-    // 특정 감정별로 최신순으로 정렬하여 보여주는 엔드포인트
-    @GetMapping("/question/{questionId}/emotion/{emotionId}/recent")
-    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionIdOrderByCreatedAtDesc(@PathVariable Long questionId, @PathVariable Long emotionId) {
-        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionIdOrderByCreatedAtDesc(questionId, emotionId));
-    }
-
-    // 특정 감정별로 인기순으로 정렬하여 보여주는 엔드포인트
-    @GetMapping("/question/{questionId}/emotion/{emotionId}/popular")
-    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionIdOrderByHeartCountDesc(@PathVariable Long questionId, @PathVariable Long emotionId) {
-        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionIdOrderByHeartCountDesc(questionId, emotionId));
-    }
+//    // 특정 감정별로 글을 분류하여 보여주는 엔드포인트
+//    @GetMapping("/question/{questionId}/emotion/{emotionId}")
+//    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionId(@PathVariable Long questionId, @PathVariable Long emotionId) {
+//        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionId(questionId, emotionId));
+//    }
+//
+//    // 특정 감정별로 최신순으로 정렬하여 보여주는 엔드포인트
+//    @GetMapping("/question/{questionId}/emotion/{emotionId}/recent")
+//    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionIdOrderByCreatedAtDesc(@PathVariable Long questionId, @PathVariable Long emotionId) {
+//        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionIdOrderByCreatedAtDesc(questionId, emotionId));
+//    }
+//
+//    // 특정 감정별로 인기순으로 정렬하여 보여주는 엔드포인트
+//    @GetMapping("/question/{questionId}/emotion/{emotionId}/popular")
+//    public ResponseEntity<List<PostDto>> getPostsByQuestionIdAndEmotionIdOrderByHeartCountDesc(@PathVariable Long questionId, @PathVariable Long emotionId) {
+//        return ResponseEntity.ok(postService.getPostsByQuestionIdAndEmotionIdOrderByHeartCountDesc(questionId, emotionId));
+//    }
 
     // 글 수정 기능
     @PutMapping("/{id}")

@@ -1,8 +1,8 @@
 package Hackerton.CRUD.dto;
 
 
-import Hackerton.CRUD.domain.Font;
-import Hackerton.CRUD.domain.Background;
+//import Hackerton.CRUD.domain.Font;
+//import Hackerton.CRUD.domain.Background;
 import Hackerton.CRUD.domain.Heart;
 import Hackerton.CRUD.domain.Post;
 import lombok.Getter;
@@ -33,11 +33,9 @@ public class PostDto {
         dto.setId(post.getId());
         dto.setMemberId(post.getMember() != null ? post.getMember().getId() : null);
         dto.setQuestionId(post.getQuestion() != null ? post.getQuestion().getId() : null);
-        dto.setEmotionId(post.getEmotion() != null ? post.getEmotion().getId() : null);
-        dto.setFontIds(post.getPostFonts() != null ? post.getPostFonts().stream().map(postFont -> postFont.getFont().getId()).collect(Collectors.toList()) : null);
-        dto.setBackgroundIds(post.getPostBackgrounds() != null ? post.getPostBackgrounds().stream().map(postBackground -> postBackground.getBackground().getId()).collect(Collectors.toList()) : null);
-//        dto.setFontIds(post.getFonts() != null ? post.getFonts().stream().map(Font::getId).collect(Collectors.toList()) : null);
-//        dto.setBackgroundIds(post.getBackgrounds() != null ? post.getBackgrounds().stream().map(Background::getId).collect(Collectors.toList()) : null);
+//        dto.setEmotionId(post.getEmotion() != null ? post.getEmotion().getId() : null);
+//        dto.setFontIds(post.getPostFonts() != null ? post.getPostFonts().stream().map(postFont -> postFont.getFont().getId()).collect(Collectors.toList()) : null);
+//        dto.setBackgroundIds(post.getPostBackgrounds() != null ? post.getPostBackgrounds().stream().map(postBackground -> postBackground.getBackground().getId()).collect(Collectors.toList()) : null);
         dto.setContent(post.getContent());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setTitle(post.getTitle());

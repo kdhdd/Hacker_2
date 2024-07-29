@@ -26,9 +26,9 @@ public class Post {
     private Question question;
 
 
-    @ManyToOne
-    @JoinColumn(name = "emotionId")
-    private Emotion emotion;
+//    @ManyToOne
+//    @JoinColumn(name = "emotionId")
+//    private Emotion emotion;
 
     private String content;
     private LocalDateTime createdAt;
@@ -39,31 +39,16 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Heart> hearts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostFont> postFonts = new ArrayList<>();
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    private List<PostFont> postFonts = new ArrayList<>();
+//
+//
+//
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    private List<PostBackground> postBackgrounds = new ArrayList<>();
 
-//    //Post Table을 참조하는 컬럼명을 post_id
-//    //Font Table을 참조하는 컬럼명을 font_id로 지칭
-//    @ManyToMany
-//    @JoinTable(
-//            name = "post_font",
-//            joinColumns = @JoinColumn(name = "post_id"),
-//            inverseJoinColumns = @JoinColumn(name = "font_id")
-//    )
-//    private List<Font> fonts;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostBackground> postBackgrounds = new ArrayList<>();
 
-//    //Post Table을 참조하는 컬럼명을 post_id
-//    //background Table을 참조하는 컬럼명을 background_id로 지칭
-//    @ManyToMany
-//    @JoinTable(
-//            name = "post_background",
-//            joinColumns = @JoinColumn(name = "post_id"),
-//            inverseJoinColumns = @JoinColumn(name = "background_id")
-//    )
-//    private List<Background> backgrounds;
 
     // 좋아요 표시 갯수 파악
     // null 일 경우 0 반환, null이 아닐 경우 리스트 크기 반환

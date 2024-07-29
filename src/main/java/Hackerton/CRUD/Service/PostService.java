@@ -18,13 +18,13 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final FontRepository fontRepository;
-    private final BackgroundRepository backgroundRepository;
+//    private final FontRepository fontRepository;
+//    private final BackgroundRepository backgroundRepository;
     private final QuestionRepository questionRepository;
     private final MemberRepository memberRepository;
-    private final EmotionRepository emotionRepository;
-    private final PostFontRepository postFontRepository;
-    private final PostBackgroundRepository postBackgroundRepository;
+//    private final EmotionRepository emotionRepository;
+//    private final PostFontRepository postFontRepository;
+//    private final PostBackgroundRepository postBackgroundRepository;
     private final CoinService coinService;
 
 
@@ -56,8 +56,8 @@ public class PostService {
         Post post = toEntity(postDto);
         post.setCreatedAt(LocalDateTime.now());
         post = postRepository.save(post);
-        savePostFonts(post, postDto.getFontIds());
-        savePostBackgrounds(post, postDto.getBackgroundIds());
+//        savePostFonts(post, postDto.getFontIds());
+//        savePostBackgrounds(post, postDto.getBackgroundIds());
         return PostDto.from(post);
     }
 
@@ -89,24 +89,24 @@ public class PostService {
                 throw new IllegalStateException("해당 ID의 질문을 찾을 수 없습니다.");
             }
 
-            // Emotion 객체를 조회하여 설정
-            Emotion emotion = emotionRepository.findById(postDto.getEmotionId()).orElse(null);
-            if (emotion != null) {
-                post.setEmotion(emotion);
-            } else {
-                throw new IllegalStateException("해당 ID의 감정을 찾을 수 없습니다.");
-            }
+//            // Emotion 객체를 조회하여 설정
+//            Emotion emotion = emotionRepository.findById(postDto.getEmotionId()).orElse(null);
+//            if (emotion != null) {
+//                post.setEmotion(emotion);
+//            } else {
+//                throw new IllegalStateException("해당 ID의 감정을 찾을 수 없습니다.");
+//            }
 
             post.setContent(postDto.getContent());
             post.setCreatedAt(postDto.getCreatedAt());
             post.setTitle(postDto.getTitle());
             post.setTempSave(postDto.getTempSave());
 
-            postFontRepository.deleteByPost(post);
-            postBackgroundRepository.deleteByPost(post);
-
-            savePostFonts(post, postDto.getFontIds());
-            savePostBackgrounds(post, postDto.getBackgroundIds());
+//            postFontRepository.deleteByPost(post);
+//            postBackgroundRepository.deleteByPost(post);
+//
+//            savePostFonts(post, postDto.getFontIds());
+//            savePostBackgrounds(post, postDto.getBackgroundIds());
 
             post = postRepository.save(post);
             return PostDto.from(post);
@@ -143,27 +143,27 @@ public class PostService {
                 .map(PostDto::from)
                 .collect(Collectors.toList());
     }
-
-    // 특정 감정별로 글을 분류하여 보여주는 기능
-    public List<PostDto> getPostsByQuestionIdAndEmotionId(Long questionId, Long emotionId) {
-        return postRepository.findByQuestionIdAndEmotionId(questionId, emotionId).stream()
-                .map(PostDto::from)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 감정별로 최신순 정렬하여 보여주는 기능
-    public List<PostDto> getPostsByQuestionIdAndEmotionIdOrderByCreatedAtDesc(Long questionId, Long emotionId) {
-        return postRepository.findByQuestionIdAndEmotionIdOrderByCreatedAtDesc(questionId, emotionId).stream()
-                .map(PostDto::from)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 감정별로 인기순 정렬하여 보여주는 기능
-    public List<PostDto> getPostsByQuestionIdAndEmotionIdOrderByHeartCountDesc(Long questionId, Long emotionId) {
-        return postRepository.findByQuestionIdAndEmotionIdOrderByHeartCountDesc(questionId, emotionId).stream()
-                .map(PostDto::from)
-                .collect(Collectors.toList());
-    }
+//
+//    // 특정 감정별로 글을 분류하여 보여주는 기능
+//    public List<PostDto> getPostsByQuestionIdAndEmotionId(Long questionId, Long emotionId) {
+//        return postRepository.findByQuestionIdAndEmotionId(questionId, emotionId).stream()
+//                .map(PostDto::from)
+//                .collect(Collectors.toList());
+//    }
+//
+//    // 특정 감정별로 최신순 정렬하여 보여주는 기능
+//    public List<PostDto> getPostsByQuestionIdAndEmotionIdOrderByCreatedAtDesc(Long questionId, Long emotionId) {
+//        return postRepository.findByQuestionIdAndEmotionIdOrderByCreatedAtDesc(questionId, emotionId).stream()
+//                .map(PostDto::from)
+//                .collect(Collectors.toList());
+//    }
+//
+//    // 특정 감정별로 인기순 정렬하여 보여주는 기능
+//    public List<PostDto> getPostsByQuestionIdAndEmotionIdOrderByHeartCountDesc(Long questionId, Long emotionId) {
+//        return postRepository.findByQuestionIdAndEmotionIdOrderByHeartCountDesc(questionId, emotionId).stream()
+//                .map(PostDto::from)
+//                .collect(Collectors.toList());
+//    }
     // 사용자가 다른 주제의 글을 보려고 할 때 코인을 차감하는 기능
     // 코인 사용하여 다른 주제의 글 조회 기능
     @Transactional
@@ -192,9 +192,9 @@ public class PostService {
         dto.setId(post.getId());
         dto.setMemberId(post.getMember() != null ? post.getMember().getId() : null);
         dto.setQuestionId(post.getQuestion() != null ? post.getQuestion().getId() : null);
-        dto.setEmotionId(post.getEmotion() != null ? post.getEmotion().getId() : null);
-        dto.setFontIds(post.getPostFonts() != null ? post.getPostFonts().stream().map(postFont -> postFont.getFont().getId()).collect(Collectors.toList()) : null);
-        dto.setBackgroundIds(post.getPostBackgrounds() != null ? post.getPostBackgrounds().stream().map(postBackground -> postBackground.getBackground().getId()).collect(Collectors.toList()) : null);
+//        dto.setEmotionId(post.getEmotion() != null ? post.getEmotion().getId() : null);
+//        dto.setFontIds(post.getPostFonts() != null ? post.getPostFonts().stream().map(postFont -> postFont.getFont().getId()).collect(Collectors.toList()) : null);
+//        dto.setBackgroundIds(post.getPostBackgrounds() != null ? post.getPostBackgrounds().stream().map(postBackground -> postBackground.getBackground().getId()).collect(Collectors.toList()) : null);
         dto.setContent(post.getContent());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setTitle(post.getTitle());
@@ -226,13 +226,13 @@ public class PostService {
             throw new IllegalStateException("해당 ID의 질문을 찾을 수 없습니다.");
         }
 
-        // Emotion 객체를 조회하여 설정
-        Emotion emotion = emotionRepository.findById(dto.getEmotionId()).orElse(null);
-        if (emotion != null) {
-            post.setEmotion(emotion);
-        } else {
-            throw new IllegalStateException("해당 ID의 감정을 찾을 수 없습니다.");
-        }
+//        // Emotion 객체를 조회하여 설정
+//        Emotion emotion = emotionRepository.findById(dto.getEmotionId()).orElse(null);
+//        if (emotion != null) {
+//            post.setEmotion(emotion);
+//        } else {
+//            throw new IllegalStateException("해당 ID의 감정을 찾을 수 없습니다.");
+//        }
 
         post.setContent(dto.getContent());
         post.setCreatedAt(dto.getCreatedAt());
@@ -241,33 +241,33 @@ public class PostService {
         return post;
     }
 
-    private void savePostFonts(Post post, List<Long> fontIds) {
-        if (fontIds != null) {
-            for (Long fontId : fontIds) {
-                Font font = fontRepository.findById(fontId).orElse(null);
-                if (font != null) {
-                    PostFont postFont = new PostFont();
-                    postFont.setPost(post);
-                    postFont.setFont(font);
-                    postFontRepository.save(postFont);
-                }
-            }
-        }
-    }
+//    private void savePostFonts(Post post, List<Long> fontIds) {
+//        if (fontIds != null) {
+//            for (Long fontId : fontIds) {
+//                Font font = fontRepository.findById(fontId).orElse(null);
+//                if (font != null) {
+//                    PostFont postFont = new PostFont();
+//                    postFont.setPost(post);
+//                    postFont.setFont(font);
+//                    postFontRepository.save(postFont);
+//                }
+//            }
+//        }
+//    }
 
-    private void savePostBackgrounds(Post post, List<Long> backgroundIds) {
-        if (backgroundIds != null) {
-            for (Long backgroundId : backgroundIds) {
-                Background background = backgroundRepository.findById(backgroundId).orElse(null);
-                if (background != null) {
-                    PostBackground postBackground = new PostBackground();
-                    postBackground.setPost(post);
-                    postBackground.setBackground(background);
-                    postBackgroundRepository.save(postBackground);
-                }
-            }
-        }
-    }
+//    private void savePostBackgrounds(Post post, List<Long> backgroundIds) {
+//        if (backgroundIds != null) {
+//            for (Long backgroundId : backgroundIds) {
+//                Background background = backgroundRepository.findById(backgroundId).orElse(null);
+//                if (background != null) {
+//                    PostBackground postBackground = new PostBackground();
+//                    postBackground.setPost(post);
+//                    postBackground.setBackground(background);
+//                    postBackgroundRepository.save(postBackground);
+//                }
+//            }
+//        }
+//    }
     // 매일 22시에 1위, 2위, 3위 게시물 선정하여 코인 지급
     //heart 갯수가 가장 많은 게시물
     @Scheduled(cron = "0 0 22 * * ?") // 매일 저녁 22시에 실행

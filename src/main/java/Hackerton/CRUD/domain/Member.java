@@ -28,7 +28,7 @@ public class Member {
     private UserRole role;
 
     // 이름을 coins로 변경하고 기본값 설정
-    @Column(nullable = false)
+    @Column(nullable = true)
     @ColumnDefault("0")
     private Long coins;
 
@@ -48,14 +48,14 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<MemberQuestion> memberQuestions = new ArrayList<>();
 
-    //Font 관계 추가
-    @OneToMany(mappedBy = "member")
-    private List<MemberFont> memberFonts = new ArrayList<>();
-
-
-    //Background 관계 추가
-    @OneToMany(mappedBy = "member")
-    private List<MemberBackground> memberBackgrounds = new ArrayList<>();
+//    //Font 관계 추가
+//    @OneToMany(mappedBy = "member")
+//    private List<MemberFont> memberFonts = new ArrayList<>();
+//
+//
+//    //Background 관계 추가
+//    @OneToMany(mappedBy = "member")
+//    private List<MemberBackground> memberBackgrounds = new ArrayList<>();
 
 
     //Post 관계 추가

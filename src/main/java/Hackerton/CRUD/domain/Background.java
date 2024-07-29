@@ -19,11 +19,11 @@ public class Background {
     private String backgroundColor;
     private Integer backgroundPointCost;
 
-    @OneToMany(mappedBy = "background")
-    private List<PostBackground> postBackgrounds;
+//    @OneToMany(mappedBy = "background")
+//    private List<PostBackground> postBackgrounds;
 
-    @OneToMany(mappedBy = "background")
-    private List<MemberBackground> memberBackgrounds;
+//    @OneToMany(mappedBy = "background")
+//    private List<MemberBackground> memberBackgrounds;
 
     //데이터를 자동으로 초기화
     public Background(String backgroundColor, Integer backgroundPointCost) {
