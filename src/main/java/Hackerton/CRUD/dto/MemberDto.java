@@ -13,7 +13,7 @@ public class MemberDto {
     private String Member_Name;
     private String Member_EMail;
     private String Member_Password;
-    private Long Member_Coins;
+    private Long coins;
     private String Badges;
     private boolean Today;
 
@@ -24,7 +24,7 @@ public class MemberDto {
         memberDto.setMember_Name(member.getNickname());
         memberDto.setMember_EMail(member.getLoginId());
         memberDto.setMember_Password(member.getPassword());
-        memberDto.setMember_Coins(member.getMember_Coins());
+        memberDto.setCoins(member.getCoins());
         memberDto.setBadges(member.getBadges());
 
         memberDto.setToday(member.isToday());

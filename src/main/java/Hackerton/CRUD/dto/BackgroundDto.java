@@ -1,11 +1,11 @@
-package Hackerton.CRUD.dto;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class BackgroundDto {
-    private String backgroundColor;
-    private Integer backgroundPointCost;
-}
+//package Hackerton.CRUD.dto;
+//
+//import lombok.Getter;
+//import lombok.Setter;
+//
+//@Getter
+//@Setter
+//public class BackgroundDto {
+//    private String backgroundColor;
+//    private Integer backgroundPointCost;
+//}

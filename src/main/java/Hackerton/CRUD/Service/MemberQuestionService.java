@@ -17,13 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberQuestionService {
 
-    @Autowired
     private final MemberQuestionRepository memberQuestionRepository;
-
-    @Autowired
     private final MemberRepository memberRepository;
-
-    @Autowired
     private final QuestionRepository questionRepository;
 
     public MemberQuestion createMemberQuestion(MemberQuestionDto memberQuestionDto) {
@@ -63,7 +58,4 @@ public class MemberQuestionService {
         return null;
     }
 
-    public void deleteMemberQuestion(Long id) {
-        memberQuestionRepository.deleteById(id);
-    }
 }

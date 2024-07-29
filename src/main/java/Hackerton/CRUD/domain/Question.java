@@ -3,6 +3,7 @@ package Hackerton.CRUD.domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,5 +20,10 @@ public class Question {
 
     private String content;
     private LocalDateTime createdAt;
-    private LocalDateTime selectedAt;
+
+    @OneToMany(mappedBy = "question")
+    private List<MemberQuestion> memberQuestions;
+
+    @OneToMany(mappedBy = "question")
+    private List<Post> posts;
 }

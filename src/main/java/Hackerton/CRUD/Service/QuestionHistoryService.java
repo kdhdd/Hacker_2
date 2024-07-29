@@ -16,10 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuestionHistoryService {
 
-    @Autowired
     private final QuestionHistoryRepository questionHistoryRepository;
-
-    @Autowired
     private final QuestionRepository questionRepository;
 
     public QuestionHistory createQuestionHistory(QuestionHistoryDto questionHistoryDto) {

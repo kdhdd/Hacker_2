@@ -34,9 +34,4 @@ public class MemberQuestionController {
     public MemberQuestion updateMemberQuestion(@PathVariable Long id, @RequestBody MemberQuestionDto memberQuestionDto) {
         return memberQuestionService.updateMemberQuestion(id, memberQuestionDto);
     }
-
-    @DeleteMapping("/{id}")
-    public void deleteMemberQuestion(@PathVariable Long id) {
-        memberQuestionService.deleteMemberQuestion(id);
-    }
 }

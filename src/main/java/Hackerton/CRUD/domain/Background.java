@@ -3,9 +3,7 @@ package Hackerton.CRUD.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -20,17 +18,19 @@ public class Background {
 
     private String backgroundColor;
     private Integer backgroundPointCost;
-//    private LocalDateTime createdAt;
-//    private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "background")
-    private List<PostBackground> postBackgrounds;
+//    @OneToMany(mappedBy = "background")
+//    private List<PostBackground> postBackgrounds;
 
-//    //다대다 조인
-//    @ManyToMany(mappedBy = "backgrounds")
-//    private List<Post> posts;
+//    @OneToMany(mappedBy = "background")
+//    private List<MemberBackground> memberBackgrounds;
 
+    //데이터를 자동으로 초기화
+    public Background(String backgroundColor, Integer backgroundPointCost) {
+        this.backgroundColor = backgroundColor;
+        this.backgroundPointCost = backgroundPointCost;
+    }
 
-
-
+    public Background() {
+    }
 }

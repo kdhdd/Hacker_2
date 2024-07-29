@@ -7,8 +7,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class QuestionDto {
-    private Long id;
-    private String content;
+public class CoinTransactionDto {
+    private Long memberId;
+    private Integer changeAmount;
+    private String description;
     private LocalDateTime createdAt;
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity // 테이블과 엔티티 매핑
+@Entity
 @Builder
 @Getter
 @Setter
@@ -27,7 +27,11 @@ public class Member {
 
     private UserRole role;
 
-    private Long Member_Coins;
+    // 이름을 coins로 변경하고 기본값 설정
+    @Column(nullable = true)
+    @ColumnDefault("0")
+    private Long coins;
+
     private String Badges;
 
     @Builder.Default
@@ -39,5 +43,33 @@ public class Member {
     @Builder.Default
     @OneToMany(mappedBy="member")
     private List<Comment> comments = new ArrayList<>();
+
+    // MemberQuestion 관계 추가
+    @OneToMany(mappedBy = "member")
+    private List<MemberQuestion> memberQuestions = new ArrayList<>();
+
+//    //Font 관계 추가
+//    @OneToMany(mappedBy = "member")
+//    private List<MemberFont> memberFonts = new ArrayList<>();
+//
+//
+//    //Background 관계 추가
+//    @OneToMany(mappedBy = "member")
+//    private List<MemberBackground> memberBackgrounds = new ArrayList<>();
+
+
+    //Post 관계 추가
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
+
+    /*
+    도현님.. 여기 한번 수정 해야 할지도..
+    @OneToMany(mappedBy = "member")
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Heart> hearts = new ArrayList<>();*/
+
+
 
 }

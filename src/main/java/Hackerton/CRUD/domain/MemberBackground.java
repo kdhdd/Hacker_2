@@ -7,20 +7,26 @@
 //@Entity
 //@Getter
 //@Setter
-//@IdClass(PostBackgroundId.class)
-//public class PostBackground {
+//public class MemberBackground {
+//
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "post_background_id")
+//    @Column(name = "member_background_id")
 //    private Long id;
 //
 //    @ManyToOne
-//    @JoinColumn(name = "post_id")
-//    private Post post;
+//    @JoinColumn(name = "member_id")
+//    private Member member;
 //
 //    @ManyToOne
 //    @JoinColumn(name = "background_id")
 //    private Background background;
 //
+//    public MemberBackground() {
+//    }
 //
+//    public MemberBackground(Member member, Background background) {
+//        this.member = member;
+//        this.background = background;
+//    }
 //}
