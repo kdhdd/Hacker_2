@@ -42,10 +42,10 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/jwt-login/login").permitAll()
-                                .requestMatchers("/jwt-login/join").permitAll()
-                                .requestMatchers("/jwt-login/info").authenticated()
-                                .requestMatchers("/jwt-login/admin/**").hasAuthority(UserRole.ADMIN.name())
+                                .requestMatchers("/api/members/login").permitAll()
+                                .requestMatchers("/api/members/join").permitAll()
+                                .requestMatchers("/api/members/info").authenticated()
+                                .requestMatchers("/api/members/admin/**").hasAuthority(UserRole.ADMIN.name())
                                 .anyRequest().permitAll()
 
                 )
